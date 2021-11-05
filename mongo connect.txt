@@ -1,0 +1,24 @@
+1-create a folder called config
+2- create a file called keys.js
+3- type
+module.exports = {
+	MongoURI: 'mongo connection url'
+}
+
+4- in app.js import mongoose
+5- instantiate your db
+	const db = require('file location').MongoURI
+6- mongoose.connect(db, {useNewUrlParser: true})
+	.then(() => console.log('Mongodb connected')
+	.catch(eerr => clg(err))
+
+
+
+     //creating connection url
+Mongoose.connect(connection_url, {useNewUlParser: true, useUnifiedTopology: true, useCreateIndex: false})
+
+
+
+
+
+

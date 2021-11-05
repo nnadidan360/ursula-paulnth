@@ -1,0 +1,55 @@
+continuation
+
+1- After writing code logic to validate our form, we then want to check for
+errors and display them.
+	in the code snippet below we see how its done
+
+if(errors.length > 0){
+	res.render('index',{
+ 	errors
+ })
+}
+else{
+	res.send(pass)
+}
+
+
+In The Above we check for the presence of errors. if errors is greater than
+0 we simply re-render the form and pass in the errors as well. which is to
+be displayed on the template.
+
+
+2- The else block should return pass upon success. Here we can begin our
+creating a new user in our database.
+Firstly we import User from models/users.js
+const User = require('../models/User)
+
+else{
+	User.findone({email: email})
+		.then(User => {	
+			if(user) {
+				errors.push({msg: 'Email is already registered'})
+				res.render('index', {
+					errors
+				})
+			}
+			else{
+				const newUser = new User({
+					name,
+					email,
+					password
+				})
+				bcrypt.genSalt(10, (err, salt)=>
+					bcrypt.hash(newUser.password, salt, (err, hash) =>{
+						if (err) throw err
+						newUser.password = hash
+						newUser.save()
+							.then(user =>
+								res.redirect('/login')
+							})
+							.catch(err => console.log(err))
+				}))
+			}
+		})
+ })
+}
